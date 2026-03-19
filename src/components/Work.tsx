@@ -41,6 +41,26 @@ const projects = [
 
 const Work = () => {
   useGSAP(() => {
+    if (window.innerWidth <= 1025) {
+      gsap.fromTo(
+        ".work-box",
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          ease: "power3.out",
+          stagger: 0.12,
+          scrollTrigger: {
+            trigger: ".work-section",
+            start: "top 80%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+      return;
+    }
+
     let translateX = 0;
     let timeline: gsap.core.Timeline | null = null;
 
