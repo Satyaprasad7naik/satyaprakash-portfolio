@@ -1,0 +1,111 @@
+.techstack {
+  width: 100%;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-top: 70px;
+  margin-bottom: 50px;
+}
+
+.techstack-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(194, 164, 255, 0.2), transparent 45%),
+    radial-gradient(circle at 70% 75%, rgba(194, 164, 255, 0.12), transparent 50%);
+  pointer-events: none;
+}
+
+.techstack-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.techstack-inner h2 {
+  margin: 0;
+  font-size: 70px;
+  line-height: 0.95;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.techstack-inner h2 span {
+  color: var(--accentColor);
+}
+
+.techstack-inner p {
+  margin-top: 20px;
+  margin-bottom: 35px;
+  max-width: 820px;
+  font-size: 18px;
+  color: #c8c5ca;
+}
+
+.techstack-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.techstack-chip {
+  border: 1px solid #ffffff2b;
+  border-radius: 40px;
+  padding: 12px 16px;
+  font-size: 14px;
+  letter-spacing: 0.8px;
+  background: #ffffff08;
+  backdrop-filter: blur(4px);
+  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+.techstack-chip:hover {
+  transform: translateY(-2px);
+  border-color: #c2a4ff;
+  background: #c2a4ff1a;
+}
+
+@media only screen and (max-width: 1280px) {
+  .techstack-inner h2 {
+    font-size: 56px;
+  }
+
+  .techstack-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .techstack {
+    min-height: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 40px 0;
+  }
+
+  .techstack-inner h2 {
+    font-size: 42px;
+  }
+
+  .techstack-inner p {
+    font-size: 14px;
+    margin-top: 12px;
+    margin-bottom: 20px;
+  }
+
+  .techstack-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .techstack-chip {
+    font-size: 12px;
+    padding: 10px 12px;
+  }
+}
