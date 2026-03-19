@@ -4,7 +4,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const projects = [
   {
@@ -41,38 +41,57 @@ const projects = [
 
 const Work = () => {
   useGSAP(() => {
-    let translateX: number = 0;
-    function setTranslateX() {
+    let translateX = 0;
+    let timeline: gsap.core.Timeline | null = null;
+
+    const setTranslateX = () => {
       const box = document.getElementsByClassName("work-box");
+      if (!box.length) return;
+
       const rectLeft = document
         .querySelector(".work-container")!
         .getBoundingClientRect().left;
       const rect = box[0].getBoundingClientRect();
       const parentWidth = box[0].parentElement!.getBoundingClientRect().width;
-      let padding: number =
+      const padding =
         parseInt(window.getComputedStyle(box[0]).padding) / 2;
-      translateX = rect.width * box.length - (rectLeft + parentWidth) + padding;
-    }
+      translateX = Math.max(
+        0,
+        rect.width * box.length - (rectLeft + parentWidth) + padding
+      );
+    };
 
     setTranslateX();
 
-    let timeline = gsap.timeline({
+    timeline = gsap.timeline({
       scrollTrigger: {
         trigger: ".work-section",
         start: "top top",
-        end: "bottom top",
-        scrub: true,
+        end: () => `+=${translateX}`,
+        scrub: 0.8,
         pin: true,
         pinType: !ScrollTrigger.isTouch ? "transform" : "fixed",
+        invalidateOnRefresh: true,
         id: "work",
       },
     });
 
     timeline.to(".work-flex", {
       x: -translateX,
-      duration: 40,
-      delay: 0.2,
+      ease: "none",
     });
+
+    const onResize = () => {
+      setTranslateX();
+      timeline?.scrollTrigger?.refresh();
+    };
+
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+      timeline?.kill();
+    };
   }, []);
   return (
     <div className="work-section" id="work">

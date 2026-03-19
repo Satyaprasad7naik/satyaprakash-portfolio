@@ -37,8 +37,8 @@ export function initialFX() {
   document.getElementsByTagName("main")[0].classList.add("main-active");
   gsap.to("body", {
     backgroundColor: "#0b080c",
-    duration: 0.5,
-    delay: 1,
+    duration: 0.65,
+    delay: 0.75,
   });
 
   const landingText = wrapChars([
@@ -51,12 +51,12 @@ export function initialFX() {
     { opacity: 0, y: 80, filter: "blur(5px)" },
     {
       opacity: 1,
-      duration: 1.2,
+      duration: 0.95,
       filter: "blur(0px)",
-      ease: "power3.inOut",
+      ease: "power3.out",
       y: 0,
-      stagger: 0.025,
-      delay: 0.3,
+      stagger: 0.018,
+      delay: 0.2,
     }
   );
 
@@ -66,12 +66,12 @@ export function initialFX() {
     { opacity: 0, y: 80, filter: "blur(5px)" },
     {
       opacity: 1,
-      duration: 1.2,
+      duration: 0.9,
       filter: "blur(0px)",
-      ease: "power3.inOut",
+      ease: "power3.out",
       y: 0,
-      stagger: 0.025,
-      delay: 0.3,
+      stagger: 0.02,
+      delay: 0.28,
     }
   );
 
@@ -80,10 +80,10 @@ export function initialFX() {
     { opacity: 0, y: 30 },
     {
       opacity: 1,
-      duration: 1.2,
-      ease: "power1.inOut",
+      duration: 0.9,
+      ease: "power2.out",
       y: 0,
-      delay: 0.8,
+      delay: 0.55,
     }
   );
   gsap.fromTo(
@@ -91,9 +91,9 @@ export function initialFX() {
     { opacity: 0 },
     {
       opacity: 1,
-      duration: 1.2,
-      ease: "power1.inOut",
-      delay: 0.1,
+      duration: 0.9,
+      ease: "power2.out",
+      delay: 0.05,
     }
   );
 
@@ -106,8 +106,8 @@ export function initialFX() {
 }
 
 function LoopText(Text1: WrappedText, Text2: WrappedText) {
-  var tl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
-  const delay = 4;
+  var tl = gsap.timeline({ repeat: -1, repeatDelay: 0.8 });
+  const delay = 2.8;
   const delay2 = delay * 2 + 1;
 
   tl.fromTo(
