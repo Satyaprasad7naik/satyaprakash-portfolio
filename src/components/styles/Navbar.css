@@ -19,7 +19,7 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  column-gap: 40px;
+  column-gap: 34px;
   row-gap: 8px;
   align-items: end;
 }
@@ -36,9 +36,10 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  font-size: 15px;
+  font-size: 14px;
   letter-spacing: 1px;
   font-weight: 500;
+  opacity: 0.9;
 }
 .navbar-title {
   font-weight: 700;
@@ -71,11 +72,11 @@
     padding: 35px 0px;
   }
   .header ul {
-    column-gap: 80px;
-    font-size: 16px;
+    column-gap: 56px;
+    font-size: 15px;
   }
   .navbar-connect {
-    font-size: 16px;
+    font-size: 15px;
   }
   .navbar-title {
     font-size: 18px;
