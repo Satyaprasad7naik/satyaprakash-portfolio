@@ -6,9 +6,10 @@ const About = () => {
       <div className="about-me">
         <h3 className="title">About Me</h3>
         <p className="para">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic quis
-          dolores numquam iusto Ratione earum ducimus autem id iure pariatur
-          dolorum quae maiores.
+          I am Satyaprakash, a Digital Marketing professional at AirDesk focused
+          on performance marketing, campaign strategy, and brand growth. I build
+          full-funnel systems across paid ads, SEO, and lifecycle marketing to
+          convert traffic into qualified leads and measurable revenue.
         </p>
       </div>
     </div>

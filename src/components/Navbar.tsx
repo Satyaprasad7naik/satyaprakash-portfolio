@@ -2,26 +2,41 @@ import { useEffect } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HoverLinks from "./HoverLinks";
 import { gsap } from "gsap";
-import { ScrollSmoother } from "gsap-trial/ScrollSmoother";
 import "./styles/Navbar.css";
 
-gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
-export let smoother: ScrollSmoother;
+gsap.registerPlugin(ScrollTrigger);
+
+type SmootherLike = {
+  paused: (_value: boolean) => void;
+  scrollTop: (_value: number) => void;
+  scrollTo: (target: string, smooth?: boolean) => void;
+};
+
+export let smoother: SmootherLike = {
+  paused: () => {},
+  scrollTop: (value: number) => {
+    window.scrollTo({ top: value, behavior: "auto" });
+  },
+  scrollTo: (target: string, smooth = true) => {
+    const section = document.querySelector(target);
+    if (!section) return;
+    section.scrollIntoView({ behavior: smooth ? "smooth" : "auto" });
+  },
+};
 
 const Navbar = () => {
   useEffect(() => {
-    ScrollSmoother.get()?.kill();
-
-    smoother = ScrollSmoother.create({
-      wrapper: "#smooth-wrapper",
-      content: "#smooth-content",
-      smooth: 1.3,
-      speed: 1.5,
-      smoothTouch: 0.08,
-      effects: true,
-      autoResize: true,
-      ignoreMobileResize: true,
-    });
+    smoother = {
+      paused: () => {},
+      scrollTop: (value: number) => {
+        window.scrollTo({ top: value, behavior: "auto" });
+      },
+      scrollTo: (target: string, smooth = true) => {
+        const section = document.querySelector(target);
+        if (!section) return;
+        section.scrollIntoView({ behavior: smooth ? "smooth" : "auto" });
+      },
+    };
 
     smoother.scrollTop(0);
     smoother.paused(true);
@@ -39,7 +54,9 @@ const Navbar = () => {
           e.preventDefault();
           const target = e.currentTarget as HTMLAnchorElement;
           const section = target.getAttribute("data-href");
-          smoother.scrollTo(section, true, "top top");
+          if (section) {
+            smoother.scrollTo(section, true);
+          }
         }
       };
 
@@ -58,21 +75,20 @@ const Navbar = () => {
         element.removeEventListener("click", handler);
       });
       window.removeEventListener("resize", onResize);
-      smoother?.kill();
     };
   }, []);
   return (
     <>
       <div className="header">
         <a href="/#" className="navbar-title" data-cursor="disable">
-          Logo
+          Satyaprakash
         </a>
         <a
-          href="mailto:example@mail.com"
+          href="mailto:satyaprakash@airdesk.io"
           className="navbar-connect"
           data-cursor="disable"
         >
-          example@mail.com
+          satyaprakash@airdesk.io
         </a>
         <ul>
           <li>
@@ -83,6 +99,11 @@ const Navbar = () => {
           <li>
             <a data-href="#work" href="#work">
               <HoverLinks text="WORK" />
+            </a>
+          </li>
+          <li>
+            <a data-href="#experience" href="#experience">
+              <HoverLinks text="EXPERIENCE" />
             </a>
           </li>
           <li>

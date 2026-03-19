@@ -1,56 +1,21 @@
-import { Suspense } from "react";
+import { lazy, Suspense } from "react";
 import "./App.css";
+import { LoadingProvider } from "./context/LoadingProvider";
 
-// Layout components
-import NavBar from "./components/layout/NavBar";
-import Footer from "./components/layout/Footer";
-
-// Section components (lazy loaded)
-import Hero from "./sections/Hero";
-import LogoShowcase from "./sections/LogoShowcase";
-import FeatureCards from "./sections/FeatureCards";
-import ShowcaseSection from "./sections/ShowcaseSection";
-import About from "./sections/About";
-import Experience from "./sections/Experience";
-import TechStack from "./sections/TechStack";
-import Testimonials from "./sections/Testimonials";
-import Contact from "./sections/Contact";
+const CharacterModel = lazy(() => import("./components/Character"));
+const MainContainer = lazy(() => import("./components/MainContainer"));
 
 const App = () => {
   return (
-    <>
-      <NavBar />
-      <main className="relative w-full">
-        <Suspense fallback={null}>
-          <Hero />
-        </Suspense>
-        <Suspense fallback={null}>
-          <LogoShowcase />
-        </Suspense>
-        <Suspense fallback={null}>
-          <FeatureCards />
-        </Suspense>
-        <Suspense fallback={null}>
-          <ShowcaseSection />
-        </Suspense>
-        <Suspense fallback={null}>
-          <About />
-        </Suspense>
-        <Suspense fallback={null}>
-          <Experience />
-        </Suspense>
-        <Suspense fallback={null}>
-          <TechStack />
-        </Suspense>
-        <Suspense fallback={null}>
-          <Testimonials />
-        </Suspense>
-        <Suspense fallback={null}>
-          <Contact />
-        </Suspense>
-      </main>
-      <Footer />
-    </>
+    <LoadingProvider>
+      <Suspense fallback={null}>
+        <MainContainer>
+          <Suspense fallback={null}>
+            <CharacterModel />
+          </Suspense>
+        </MainContainer>
+      </Suspense>
+    </LoadingProvider>
   );
 };
 
